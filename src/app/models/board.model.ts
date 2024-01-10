@@ -1,8 +1,13 @@
+import { Card } from "./cards.model";
+import { Colors } from "./colors.model";
+import { List } from "./list.model";
 import { User } from "./user.model";
 
 export interface Board {
     id: string;
     title: string;
-    backgroundColor: 'sky' | 'yellow'| 'green' | 'red' | 'violet' | 'gray';
+    backgroundColor: Colors;
     members: User[];
+    lists: List[];
+    cards: Card[];
 }
