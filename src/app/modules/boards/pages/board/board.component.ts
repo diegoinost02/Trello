@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BoardsService } from '@services/boards.service';
 import { Board } from '@models/board.model';
 import { Card } from '@models/cards.model';
+import { CardsService } from '@services/cards.service';
 
 @Component({
   selector: 'app-board',
@@ -30,11 +31,7 @@ export class BoardComponent implements OnInit{
 
   board: Board | null = null;
 
-  // todos: ToDo[] = [];
-  // doing: ToDo[] = [];
-  // done: ToDo[] = [];
-
-  constructor(private dialog: Dialog, private route: ActivatedRoute, private boardsService: BoardsService) {}
+  constructor(private dialog: Dialog, private route: ActivatedRoute, private boardsService: BoardsService, private cardsService: CardsService) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -61,6 +58,10 @@ export class BoardComponent implements OnInit{
         event.currentIndex
       );
     }
+    const position = this.boardsService.getPosition(event.container.data, event.currentIndex);
+    const cards = event.container.data[event.currentIndex];
+    const listId = event.container.id;
+    this.updateCard(cards, position, listId);
   }
 
   addColumn() {
@@ -86,6 +87,11 @@ export class BoardComponent implements OnInit{
   private getBoard(id: string) {
     this.boardsService.getBoards(id).subscribe(board => {
       this.board = board;
+    })
+  }
+  private updateCard(card: Card, position: number, listId: string | number) {
+    this.cardsService.update(card.id, { position, listId }).subscribe((card) => {
+      console.log(card);
     })
   }
 }
