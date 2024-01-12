@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -15,6 +15,7 @@ import { CardsService } from '@services/cards.service';
 import { List } from '@models/list.model';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ListsService } from '@services/lists.service';
+import { BACKGROUNDS } from '@models/colors.model';
 
 @Component({
   selector: 'app-board',
@@ -30,7 +31,7 @@ import { ListsService } from '@services/lists.service';
     `,
   ],
 })
-export class BoardComponent implements OnInit{
+export class BoardComponent implements OnInit, OnDestroy {
 
   board: Board | null = null;
 
@@ -44,6 +45,7 @@ export class BoardComponent implements OnInit{
   });
 
   showListForm = false;
+  colorBackgrounds = BACKGROUNDS;
 
   constructor(
     private dialog: Dialog,
@@ -61,6 +63,10 @@ export class BoardComponent implements OnInit{
         this.getBoard(id);
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.boardsService.setBackgroudColor('sky'); 
   }
 
   drop(event: CdkDragDrop<Card[]>) {
@@ -118,6 +124,7 @@ export class BoardComponent implements OnInit{
   private getBoard(id: string) {
     this.boardsService.getBoards(id).subscribe(board => {
       this.board = board;
+      this.boardsService.setBackgroudColor(board.backgroundColor);
     })
   }
   private updateCard(card: Card, position: number, listId: string | number) {
@@ -168,5 +175,13 @@ export class BoardComponent implements OnInit{
   }
   closeCardForm(list: List) {
     list.showCardForm = false;
+  }
+
+  get colors() {
+    if(this.board) {
+      const classes = this.colorBackgrounds[this.board.backgroundColor];
+      return classes ? classes : {};
+    }
+    return {}
   }
 }
