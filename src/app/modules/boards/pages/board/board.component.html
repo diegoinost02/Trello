@@ -19,6 +19,16 @@
             {{ card.title }}
           </div>
         </div>
+        <div class="mt-5">
+          <app-btn *ngIf="!list.showCardForm" color="light" (click)="openFormCard(list)">Add a Card</app-btn>
+          <div class="w-full" *ngIf="list.showCardForm">
+            <textarea [formControl]="inputCard" class="w-full"></textarea>
+            <div class="flex space-x-2 justify-between">
+              <app-btn color="success" (click)="createCard(list)">Create</app-btn>
+              <app-btn color="light" (click)="closeCardForm(list )">Close</app-btn>
+            </div>
+          </div>
+        </div>
       </div>
       <app-btn color="light" class="shrink-0" (click)="addColumn()">Add Column</app-btn>
     </div>

@@ -4,5 +4,6 @@ export interface List {
     id: string;
     title: string;
     position: number;
-    cards: Card[]
+    cards: Card[];
+    showCardForm?: boolean;
 }

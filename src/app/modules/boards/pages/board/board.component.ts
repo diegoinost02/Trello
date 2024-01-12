@@ -12,6 +12,8 @@ import { BoardsService } from '@services/boards.service';
 import { Board } from '@models/board.model';
 import { Card } from '@models/cards.model';
 import { CardsService } from '@services/cards.service';
+import { List } from '@models/list.model';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
@@ -30,8 +32,17 @@ import { CardsService } from '@services/cards.service';
 export class BoardComponent implements OnInit{
 
   board: Board | null = null;
+  inputCard = new FormControl<string>('',{
+    nonNullable: true,
+    validators: [Validators.required]
+  });
 
-  constructor(private dialog: Dialog, private route: ActivatedRoute, private boardsService: BoardsService, private cardsService: CardsService) {}
+  constructor(
+    private dialog: Dialog,
+    private route: ActivatedRoute,
+    private boardsService: BoardsService,
+    private cardsService: CardsService,
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -93,5 +104,49 @@ export class BoardComponent implements OnInit{
     this.cardsService.update(card.id, { position, listId }).subscribe((card) => {
       console.log(card);
     })
+  }
+
+  // openFormCard(list: List) {
+  //   list.showCardForm = !list.showCardForm;
+  //   if (this.board?.lists) {
+  //     this.board.lists = this.board.lists.map(l => {
+  //       if (l.id === list.id) {
+  //         return {
+  //           ...l,
+  //           showCardForm: true
+  //         }
+  //       }
+  //       return {
+  //         ...l,
+  //         showCardForm: false
+  //       };
+  //     });
+  //   }
+  // }
+  openFormCard(list: List){
+    if(this.board?.lists){
+      this.board.lists.map(l => {
+        l.id === list.id ? l.showCardForm = true : l.showCardForm = false;
+      })
+    }
+  }
+  
+  createCard(list: List) {
+    const title = this.inputCard.value;
+    if(this.board) {
+      this.cardsService.create({
+        title,
+        listId: list.id,
+        boardId: this.board.id,
+        position: this.boardsService.getPositionNewCard(list.cards)
+      }).subscribe(card => {
+        list.cards.push(card);
+        this.inputCard.setValue('');
+        list.showCardForm = false;
+      });
+    }
+  }
+  closeCardForm(list: List) {
+    list.showCardForm = false;
   }
 }
