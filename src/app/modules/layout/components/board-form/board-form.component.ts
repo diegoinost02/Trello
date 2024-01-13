@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Colors } from '@models/colors.model';
 import { BoardsService } from '@services/boards.service';
-
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-board-form',
   templateUrl: './board-form.component.html'
@@ -22,6 +22,8 @@ export class BoardFormComponent {
       validators: [Validators.required]
     })
   })
+
+  faCheck = faCheck;
   
   doSave() {
     if (this.form.valid) {

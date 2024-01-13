@@ -2,7 +2,7 @@
     <div>
       <div class="flex flex-wrap">
         <div class="flex items-center mr-4">
-          <input
+          <!-- <input
             id="sky-radio"
             type="radio"
             value="sky"
@@ -14,8 +14,23 @@
             for="sky-radio"
             class="ml-2 text-sm font-medium text-gray-900 "
             >Sky</label
+          > -->
+          <input
+          id="sky-radio"
+          type="radio"
+          value="sky"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="hidden peer"
+        />
+        <label
+          for="sky-radio"
+          class="inline-flex items-center justify-center w-8 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-sky-700 hover:bg-sky-500 peer-checked:text-white"
           >
+          <fa-icon [icon]="faCheck"></fa-icon>
+        </label>
         </div>
+
         <div class="flex items-center mr-4">
           <input
             id="yellow-radio"
@@ -23,12 +38,14 @@
             value="yellow"
             name="backgroundColor"
             formControlName="backgroundColor"
-            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 "
+            class="hidden peer"
           />
           <label
             for="yellow-radio"
-            class="ml-2 text-sm font-medium text-gray-900"
-            >Yellow</label
+            class="inline-flex items-center justify-center w-8 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-yellow-700 hover:bg-yellow-500 peer-checked:text-white"
+            >
+            <fa-icon [icon]="faCheck"></fa-icon>
+            </label
           >
         </div>
         <div class="flex items-center mr-4">
@@ -38,12 +55,14 @@
             value="green"
             name="backgroundColor"
             formControlName="backgroundColor"
-            class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 "
+            class="hidden peer"
           />
           <label
             for="green-radio"
-            class="ml-2 text-sm font-medium text-gray-900"
-            >green</label
+            class="inline-flex items-center justify-center w-8 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-green-700 hover:bg-green-500 peer-checked:text-white"
+            >
+            <fa-icon [icon]="faCheck"></fa-icon>
+            </label
           >
         </div>
         <div class="flex items-center mr-4">
@@ -53,12 +72,14 @@
             value="red"
             name="backgroundColor"
             formControlName="backgroundColor"
-            class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 "
+            class="hidden peer"
           />
           <label
             for="red-radio"
-            class="ml-2 text-sm font-medium text-gray-900"
-            >red</label
+            class="inline-flex items-center justify-center w-8 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-red-700 hover:bg-red-500 peer-checked:text-white"
+            >
+            <fa-icon [icon]="faCheck"></fa-icon>
+            </label
           >
         </div>
         <div class="flex items-center mr-4">
@@ -68,12 +89,14 @@
             value="violet"
             name="backgroundColor"
             formControlName="backgroundColor"
-            class="w-4 h-4 text-violet-600 bg-gray-100 border-gray-300 focus:ring-violet-500 dark:focus:ring-violet-600 "
+            class="hidden peer"
           />
           <label
             for="violet-radio"
-            class="ml-2 text-sm font-medium text-gray-900"
-            >violet</label
+            class="inline-flex items-center justify-center w-8 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-violet-700 hover:bg-violet-500 peer-checked:text-white"
+            >
+            <fa-icon [icon]="faCheck"></fa-icon>
+            </label
           >
         </div>
         <div class="flex items-center mr-4">
@@ -83,12 +106,14 @@
             value="gray"
             name="backgroundColor"
             formControlName="backgroundColor"
-            class="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500 dark:focus:ring-gray-600 "
+            class="hidden peer"
           />
           <label
             for="gray-radio"
-            class="ml-2 text-sm font-medium text-gray-900"
-            >gray</label
+            class="inline-flex items-center justify-center w-8 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-gray-700 hover:bg-gray-500 peer-checked:text-white"
+            >
+            <fa-icon [icon]="faCheck"></fa-icon>
+            </label
           >
         </div>
       </div>
